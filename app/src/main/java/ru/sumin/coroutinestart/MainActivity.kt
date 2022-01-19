@@ -2,6 +2,7 @@ package ru.sumin.coroutinestart
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -52,6 +53,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadTemperature(city: String, callback: (Int) -> Unit) {
         thread {
+            Looper.prepare()
+            // простой вызов хандлера вызовет ошибки, надо вызывать перед ним луупер.препаре
+            Handler()
             handler.post {
                 Toast.makeText(
                     this,
