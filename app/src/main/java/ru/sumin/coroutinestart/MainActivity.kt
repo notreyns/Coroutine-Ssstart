@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    //handler без параметров объявлен устаревшим, надо в параметрах указывать в каком потоке хэндлер работает
     private val handler = Handler()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             Looper.prepare()
             // простой вызов хандлера вызовет ошибки, надо вызывать перед ним луупер.препаре
             Handler()
-            handler.post {
+            Handler(Looper.getMainLooper()).post{
                 Toast.makeText(
                     this,
                     getString(R.string.loading_temperature_toast, city),
@@ -65,7 +66,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             Thread.sleep(5000)
-            handler.post {
+            //runOnUiThread и Handler(Looper.getMainLooper()) равносильны
+            runOnUiThread() {
                 callback.invoke(17)
             }
         }
