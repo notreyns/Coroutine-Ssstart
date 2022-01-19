@@ -9,6 +9,8 @@ import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
+
+
     private val binding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.buttonLoad.setOnClickListener {
             loadData()
         }
+
     }
 
     private fun loadData() {
